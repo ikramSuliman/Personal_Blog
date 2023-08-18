@@ -11,7 +11,24 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    public function posts()
+    {
+        return $this->hasMany(Post::class,'user_id');
 
+    }
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+    public function favorites()
+    {
+        return $this->morphMany(Favoriteable::class,"favoriteable");
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,'user_id');
+    }
     /**
      * The attributes that are mass assignable.
      *
