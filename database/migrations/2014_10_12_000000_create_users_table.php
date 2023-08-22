@@ -24,8 +24,6 @@ return new class extends Migration
             $table->text('bio')->nullable();
             $table->timestamp('birthdate')->nullable();
             $table->timestamps();
-
-
             Schema::enableForeignKeyConstraints();
         });
     }

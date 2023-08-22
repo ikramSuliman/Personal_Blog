@@ -28,7 +28,11 @@ class Post extends Model
     }
     public function favorites()
     {
-        return $this->morphMany(Favorite::class, 'favoriteable');
+        return $this->belongsToMany(Favorite::class, 'favoriteable');
+    }
+    public function like()
+    {
+        return $this->belongsToMany(Like::class, 'favoriteable');
     }
 
     public function category() {

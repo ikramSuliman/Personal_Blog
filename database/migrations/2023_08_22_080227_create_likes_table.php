@@ -9,20 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
-            $table->string('name');
-            $table->string('thumbnail');
-            $table->string('color');
+            $table->morphs('model');
             $table->timestamps();
-        Schema::enableForeignKeyConstraints();
         });
-
     }
 
     /**
@@ -30,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('likes');
     }
 };

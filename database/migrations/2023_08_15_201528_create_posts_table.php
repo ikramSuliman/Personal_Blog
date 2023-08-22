@@ -12,17 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-            Schema::disableForeignKeyConstraints();
+        Schema::disableForeignKeyConstraints();
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('statuses');
-            $table->text('content');
+            $table->string('slug')->unique();
+            $table->foreignId('user_id')->nullable()->constrained('statuses')->cascadeOnDelete();
+            $table->longText('content');
             $table->foreignId('status_id')->nullable()->constrained('statuses')->cascadeOnDelete();
             $table->string('title');
             $table->boolean('is_featured');
             $table->integer('views_count')->default(0);
-            $table->string('image')->nullable();
+            $table->morphs('image');
             $table->timestamps();
-            Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
         });
     }
 
