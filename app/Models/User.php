@@ -22,7 +22,11 @@ class User extends Authenticatable
     }
     public function favorites()
     {
-        return $this->morphMany(Favoriteable::class,"favoriteable");
+        return $this->belongsToMany(Favoriteable::class,"favoriteable");
+    }
+    public function like()
+    {
+        return $this->belongsToMany(Like::class,"favoriteable");
     }
 
     public function comments()
